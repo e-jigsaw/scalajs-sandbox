@@ -37,7 +37,7 @@ Getting org.scala-sbt sbt 0.13.6 ...
 
 `src/main/scala/tutorial/webapp/TutorialApp.scala`:
 
-```
+```scala
 package tutorial.webapp
 
 import scala.scalajs.js.JSApp
@@ -166,7 +166,7 @@ Hello world!!
 
 なにも出ずに終了するのですが、どうやら `main` メソッドを呼んでやらないといけないようです。チュートリアルでは HTML を書いてブラウザで実行するように書かれていますが、面倒くさいのでファイルに追記してささっと確認します。
 
-```
+```javascript
 ...
   s_Equals: 1,
   jl_RuntimeException: 1,
@@ -191,7 +191,7 @@ Hello world!!
 
 やりました！3000行の HelloWorld の JavaScript のコードが錬成されました。ランタイムのコードを追おうとおもったんですが、長すぎて普通に心が折れそうになったのでとりあえず `main` っぽいところを読んでみると
 
-```
+```javascript
 ScalaJS.c.Ltutorial_webapp_TutorialApp$.prototype.$$js$exported$meth$main__O = (function() {
   var this$2 = ScalaJS.m.s_Console();
   var this$3 = this$2.outVar$2;
@@ -201,7 +201,7 @@ ScalaJS.c.Ltutorial_webapp_TutorialApp$.prototype.$$js$exported$meth$main__O = (
 
 `println__O__V` を読んでみると
 
-```
+```javascript
 ScalaJS.c.Ljava_io_PrintStream.prototype.println__O__V = (function(x) {
   this.print__O__V(x);
   this.write__I__V(10)
@@ -210,7 +210,7 @@ ScalaJS.c.Ljava_io_PrintStream.prototype.println__O__V = (function(x) {
 
 `print__O__V` があやしいですね。
 
-```
+```javascript
 ScalaJS.c.Ljava_io_PrintStream.prototype.print__O__V = (function(o) {
   if ((o === null)) {
     ScalaJS.i.jl_JSConsoleBasedPrintStream$class__print__jl_JSConsoleBasedPrintStream__T__V(this, "null")
@@ -223,7 +223,7 @@ ScalaJS.c.Ljava_io_PrintStream.prototype.print__O__V = (function(o) {
 
 どうやら `jl_JSConsoleBasedPrintStream$class__print__jl_JSConsoleBasedPrintStream__T__V` というどえらい長い関数がそれっぽいです。
 
-```
+```javascript
 ScalaJS.i.jl_JSConsoleBasedPrintStream$class__print__jl_JSConsoleBasedPrintStream__T__V = (function($$this, s) {
   var rest = ((s === null) ? "null" : s);
   while ((!ScalaJS.i.sjsr_RuntimeString$class__isEmpty__sjsr_RuntimeString__Z(rest))) {
@@ -244,7 +244,7 @@ ScalaJS.i.jl_JSConsoleBasedPrintStream$class__print__jl_JSConsoleBasedPrintStrea
 
 `doWriteLine__T__V` が書き出しをしている気がします。
 
-```
+```javascript
 ScalaJS.c.jl_StandardErrPrintStream$.prototype.doWriteLine__T__V = (function(line) {
   if ((!ScalaJS.uZ((!ScalaJS.g["console"])))) {
     if ((!ScalaJS.uZ((!ScalaJS.g["console"]["error"])))) {
@@ -258,7 +258,7 @@ ScalaJS.c.jl_StandardErrPrintStream$.prototype.doWriteLine__T__V = (function(lin
 
 `ScalaJS.g` までたどりつきました！！
 
-```
+```javascript
 var ScalaJS = {
   // Fields
   g: (typeof global === "object" && global && global["Object"] === Object) ? global : this, // Global scope
